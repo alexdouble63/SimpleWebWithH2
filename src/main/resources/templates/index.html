@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список сотрудников</title>
+</head>
+<body>
+    <h1 align="center">Список сотрудников</h1>
+    <hr>
+    <br>
+    <table style="border-collapse: collapse; width: 100%;">
+        <thead>
+        <tr style="border: 1px solid white;  background-color: #333; color: white;">
+            <th style="border: 1px solid white; padding: 8px;">Фамилия</th>
+            <th style="border: 1px solid white; padding: 8px;">Имя</th>
+            <th style="border: 1px solid white; padding: 8px;">Отдел</th>
+            <th style="border: 1px solid white; padding: 8px;">Зарплата</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  style="border: 1px solid black;" th:each="person : ${personList}">
+            <td style="border: 1px solid black; padding: 8px;">
+                <a th:href="@{/person/{id}(id=${person.getIdPerson()})}" th:text="${person.lastName}"></a>
+            </td>
+            <td style="border: 1px solid black; padding: 8px;" th:text="${person.firstName}"></td>
+            <td style="border: 1px solid black; padding: 8px;" th:text="${person.departmant.nameDepartmant}"</td>
+            <td style="border: 1px solid black; padding: 8px;" th:text="${person.salary}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <hr>
+    <form th:action="@{person/newPerson}">
+        <button style="width: 200px; padding: 10px;">Добавить сотрудника</button>
+    </form>
+    <br>
+    <hr>
+    <form th:action="@{/upload-csv}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv">
+        <button type="submit" style="width: 200px; padding: 10px;">Загрузить CSV файл</button>
+    </form>
+</body>
+</html>

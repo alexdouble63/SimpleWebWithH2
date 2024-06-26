@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Сотрудник</title>
+</head>
+<body>
+    <h1 align="center">Информация о сотруднике</h1>
+    <hr>
+    <br>
+    <table style="border-collapse: collapse; width: 50%;">
+        <tr>
+            <th style="border: 1px solid black; padding: 8px; width: 30%; background-color: #333; color: white;">Фамилия</th>
+            <td style="border: 1px solid black; padding: 8px;" th:text="${person.getLastName()}"></td>
+        </tr>
+        <tr>
+            <th style="border: 1px solid black; padding: 8px; width: 30%; background-color: #333; color: white;">Имя</th>
+            <td style="border: 1px solid black; padding: 8px;" th:text="${person.firstName}"></td>
+        </tr>
+        <tr>
+            <th style="border: 1px solid black; padding: 8px; width: 30%; background-color: #333; color: white;">Отдел</th>
+            <td style="border: 1px solid black; padding: 8px;" th:text="${person.departmant.nameDepartmant}"></td>
+        </tr>
+        <tr>
+            <th style="border: 1px solid black; padding: 8px; width: 30%; background-color: #333; color: white;">Зарплата</th>
+            <td style="border: 1px solid black; padding: 8px;" th:text="${person.salary}"></td>
+        </tr>
+    </table>
+    <br>
+    <hr>
+    <form th:action="@{/person/edit/{id}(id=${person.getIdPerson()})}" th:method="get">
+        <input type="submit" value="Редактировать сотрудника" style="width: 200px; padding: 10px;" />
+    </form>
+    <form th:action="@{/person/delete/{id}(id=${person.getIdPerson()})}" th:method="post">
+        <input type="submit" value="Удалить сотрудника" style="width: 200px; padding: 10px;"/>
+    </form>
+    <form th:action="@{/}">
+        <button style="width: 200px; padding: 10px;">Список сотрудников</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать сотрдуника</title>
+</head>
+<body>
+    <h1 th:align="center">Редактировать сотрдуника</h1>
+    <hr/>
+    <br>
+    <form th:action="@{/person/edit/{id}(id=${person.getIdPerson()})}" th:object="${person}" th:method="post">
+        <table style="border-collapse: collapse; width: 50%;">
+            <tr>
+                <td style="border: 1px solid black; padding: 8px; width: 30%; background-color: #333; color: white;">Фамилия:</td>
+                <td style="border: 1px solid black; padding: 8px;"><input type="text" th:field="*{lastName}" style="width: 100%; box-sizing: border-box;" /></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black; padding: 8px; width: 30%; background-color: #333; color: white;">Имя:</td>
+                <td style="border: 1px solid black; padding: 8px;"><input type="text" th:field="*{firstName}" style="width: 100%; box-sizing: border-box;" /></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black; padding: 8px; width: 30%; background-color: #333; color: white;">Отдел:</td>
+                <td style="border: 1px solid black; padding: 8px;">
+                    <select th:field="*{departmant.idDepartmant}" required style="width: 100%; box-sizing: border-box;">
+                        <option value="">Выберите отдел</option>
+                        <th:block th:each="departmant : ${departmants}">
+                            <option th:value="${departmant.idDepartmant}" th:text="${departmant.nameDepartmant}" th:selected="${departmant.idDepartmant == person.departmant.idDepartmant}"></option>
+                        </th:block>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black; padding: 8px; width: 30%; background-color: #333; color: white;">Зарплата:</td>
+                <td style="border: 1px solid black; padding: 8px;"><input type="text" th:field="*{salary}" style="width: 100%; box-sizing: border-box;"/></td>
+            </tr>
+        </table>
+        <br>
+        <hr>
+        <button type="submit" style="width: 200px; padding: 10px;">Сохранить</button>
+    </form>
+    <form th:action="@{/person/{id}(id=${person.getIdPerson()})}">
+        <button style="width: 200px; padding: 10px;">Отмена</button>
+    </form>
+    <form th:action="@{/}">
+        <button style="width: 200px; padding: 10px;">Список сотрудников</button>
+    </form>
+</body>
+</html>

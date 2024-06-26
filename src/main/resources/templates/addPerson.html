@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить нового сотрудника</title>
+</head>
+<body>
+    <h1 align="center">Добавить нового сотрудника</h1>
+    <hr>
+    <br>
+    <form action="/savePerson" method="post">
+        <table style="border-collapse: collapse; width: 50%;">
+            <tr>
+                <td style="border: 1px solid black; padding: 8px; width: 30%; background-color: #333; color: white;">
+                    <label for="lastName">Фамилия:</label>
+                </td>
+                <td style="border: 1px solid black; padding: 8px;">
+                    <input type="text" id="lastName" name="lastName" required style="width: 100%; box-sizing: border-box;">
+                </td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black; padding: 8px; width: 30%; background-color: #333; color: white;">
+                    <label for="firstName">Имя:</label>
+                </td>
+                <td  style="border: 1px solid black; padding: 8px;">
+                    <input type="text" id="firstName" name="firstName" required style="width: 100%; box-sizing: border-box;">
+                </td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black; padding: 8px; width: 30%; background-color: #333; color: white;">
+                    <label for="departmant">Отдел:</label>
+                </td>
+                <td style="border: 1px solid black; padding: 8px;">
+                    <select id="departmant" name="departmant" required style="width: 100%; box-sizing: border-box;">
+                        <option value="">Выберите отдел</option>
+                        <th:block th:each="departmant : ${departmants}">
+                            <option th:value="${departmant.idDepartmant}" th:text="${departmant.nameDepartmant}"></option>
+                        </th:block>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black; padding: 8px; width: 30%; background-color: #333; color: white;">
+                    <label for="salary">Зарплата:</label>
+                </td>
+                <td style="border: 1px solid black; padding: 8px;">
+                    <input type="number" id="salary" name="salary" required style="width: 100%; box-sizing: border-box;">
+                </td>
+            </tr>
+        </table>
+        <br>
+        <hr>
+        <button type="submit" style="width: 200px; padding: 10px;">Сохранить</button>
+    </form>
+    <form th:action="@{/}">
+        <button style="width: 200px; padding: 10px;">Отмена</button>
+    </form>
+</body>
+</html>
